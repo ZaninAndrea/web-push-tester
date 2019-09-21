@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            #registration-box {
+                margin: 0 8px;
+                width: calc(100vw - 32px);
+                overflow: auto;
+            }
+        </style>
+    </head>
+    <body>
+        Current state: <span id="state"></span>
+        <br />
+        Public vapid key:
+        <input
+            id="publicKey"
+            value="BOZG_RBpt8yVp6J1JN08zCEPSFbYC_aHQQKNY0isQDnozk9GXZAiSHMnnXowvfacQeh38j2TQAyp9yT0qpUXS6Y"
+        />
+        <br />
+        <button onClick="window.setupWebPush()">
+            Register push
+        </button>
+        <button onClick="window.unregisterWebPush()">
+            Unregister push
+        </button>
+        <pre id="registration-box"><code id="registration"></code></pre>
+
+        <h3>Notifications received</h3>
+        <button onClick="window.clearNotifications()">Clear</button>
+        <div id="receivedNotifications"></div>
+        <script src="bundle.js"></script>
+    </body>
+</html>

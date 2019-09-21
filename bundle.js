@@ -3,6 +3,14 @@ const webpush = require("web-push")
 const vapidKeys = webpush.generateVAPIDKeys()
 document.getElementById("publicKey").value = vapidKeys.publicKey
 
+navigator.serviceWorker.onmessage = function(event) {
+    let data = event.data.message
+    let text = JSON.stringify(JSON.parse(data), null, 2)
+
+    document.getElementById("receivedNotifications").innerHTML +=
+        "<pre><code>" + text + "</code></pre>"
+}
+
 async function main() {
     const swReg = await navigator.serviceWorker.register("webpush.js")
 
@@ -94,14 +102,6 @@ async function main() {
         })
 
     window.addEventListener("message", console.log, false)
-
-    navigator.serviceWorker.onmessage = function(event) {
-        let data = event.data.message
-        let text = JSON.stringify(JSON.parse(data), null, 2)
-
-        document.getElementById("receivedNotifications").innerHTML +=
-            "<pre><code>" + text + "</code></pre>"
-    }
 }
 
 main()
